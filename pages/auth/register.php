@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../includes/header.php';
-if (isLoggedIn()) redirect('/pages/dashboard/index.php');
+if (isLoggedIn()) redirect('../dashboard/index.php');
 ?>
 
 <div class="card" style="max-width: 500px; margin: 2rem auto;">

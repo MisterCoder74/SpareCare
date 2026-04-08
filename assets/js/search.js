@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loadProfessionals = async (filters = {}) => {
         resultsContainer.innerHTML = '<div class="loading-message">Ricerca in corso...</div>';
-        
+
         const params = new URLSearchParams(filters);
         try {
-            const professionals = await Utils.fetchAPI(`/api/professionals/list.php?${params.toString()}`);
+            const professionals = await Utils.fetchAPI(`../../api/professionals/list.php?${params.toString()}`);
             renderResults(professionals);
         } catch (error) {
             resultsContainer.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;

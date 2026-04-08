@@ -4,7 +4,7 @@ define('APP_NAME', 'SpareCare');
 define('BASE_PATH', dirname(__DIR__));
 define('DATA_PATH', BASE_PATH . '/data');
 define('UPLOADS_PATH', BASE_PATH . '/assets/images/uploads');
-define('UPLOAD_URL', '/assets/images/uploads');
+define('UPLOAD_URL', 'assets/images/uploads');
 
 // Default Services
 define('DEFAULT_SERVICES', [
