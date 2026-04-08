@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     body: JSON.stringify(data)
                 });
-                window.location.href = '../pages/dashboard/index.php';
+                window.location.href = '../../pages/dashboard/index.php';
             } catch (error) {
                 Utils.showAlert(error.message);
             }
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     body: JSON.stringify(data)
                 });
-                window.location.href = '../pages/dashboard/index.php';
+                window.location.href = '../../pages/dashboard/index.php';
             } catch (error) {
                 Utils.showAlert(error.message);
             }
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             try {
                 await Utils.fetchAPI('../../api/auth/logout.php', { method: 'POST' });
-                window.location.href = '../pages/public/index.php';
+                window.location.href = '../../pages/public/index.php';
             } catch (error) {
                 console.error('Logout failed', error);
             }
