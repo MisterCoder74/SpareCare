@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         resultsContainer.innerHTML = professionals.map(p => `
             <div class="card prof-card">
-                <img src="${p.photo || 'https://via.placeholder.com/300x200?text=Foto+Profilo'}" alt="${p.first_name}" class="prof-photo">
+                <img src="${p.photo ? '../../' + p.photo : 'https://via.placeholder.com/300x200?text=Foto+Profilo'}" alt="${p.first_name}" class="prof-photo">
                 <h3 class="prof-name">${p.first_name} ${p.last_name}</h3>
                 <div class="prof-location">${p.city} (${p.province})</div>
                 <p class="prof-bio">${p.bio ? p.bio.substring(0, 100) + (p.bio.length > 100 ? '...' : '') : 'Nessuna descrizione fornita.'}</p>
