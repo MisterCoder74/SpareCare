@@ -1,0 +1,14 @@
+# Prevent directory listing
+Options -Indexes
+
+# Rewrite rules for clean URLs
+RewriteEngine On
+
+# Redirect to public homepage by default
+RewriteRule ^$ pages/public/index.php [L]
+
+# Handle assets
+RewriteRule ^assets/(.*)$ assets/$1 [L]
+
+# Protection for data and includes
+RewriteRule ^(data|includes|config)/ - [F,L]
