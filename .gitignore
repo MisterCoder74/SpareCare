@@ -1,0 +1,14 @@
+# Logs
+*.log
+error_log
+
+# Data
+data/*.tmp
+
+# Uploads
+assets/images/uploads/*
+!assets/images/uploads/.htaccess
+
+# OS files
+.DS_Store
+Thumbs.db

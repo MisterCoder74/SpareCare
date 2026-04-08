@@ -1,0 +1,11 @@
+# Disable script execution
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Allow only images
+<FilesMatch "\.(?i:jpe?g|png|gif|webp)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
