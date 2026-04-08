@@ -1,10 +1,11 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../includes/auth-check.php';
+require_once __DIR__ . '/common.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_FILES['photo'])) {
     jsonResponse(['error' => 'Invalid request'], 400);
 }
+
+requireAuth();
 
 $id = getLoggedInUserId();
 $file = $_FILES['photo'];
@@ -20,22 +21,26 @@ if ($file['size'] > 2 * 1024 * 1024) {
 
 $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 $filename = 'photo-' . $id . '-' . time() . '.' . $ext;
-$target_path = UPLOADS_PATH . '/' . $filename;
+$target_path = $uploadDir . $filename;
+
+// Create upload directory if it doesn't exist
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0755, true);
+}
 
 if (move_uploaded_file($file['tmp_name'], $target_path)) {
-    $db = new Database();
-    $professional = $db->findProfessionalById($id);
+    $professional = findProfessionalById($id);
 
     // Delete old photo if exists
     if (!empty($professional['profile']['photo'])) {
-        $old_photo = BASE_PATH . '/' . $professional['profile']['photo'];
+        $old_photo = __DIR__ . '/../' . $professional['profile']['photo'];
         if (file_exists($old_photo)) {
             unlink($old_photo);
         }
     }
 
-    $professional['profile']['photo'] = 'assets/images/uploads/' . $filename;
-    $db->updateProfessional($professional);
+    $professional['profile']['photo'] = $baseUrl . $filename;
+    updateProfessional($professional);
 
     jsonResponse(['success' => true, 'photo_url' => $professional['profile']['photo']]);
 } else {

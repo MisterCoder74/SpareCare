@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = Object.fromEntries(formData.entries());
 
             try {
-                await Utils.fetchAPI('../../api/auth/login.php', {
+                await Utils.fetchAPI('api/login.php', {
                     method: 'POST',
                     body: JSON.stringify(data)
                 });
-                window.location.href = '../../pages/dashboard/index.php';
+                window.location.href = 'dashboard.html';
             } catch (error) {
                 Utils.showAlert(error.message);
             }
@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = Object.fromEntries(formData.entries());
 
             try {
-                await Utils.fetchAPI('../../api/auth/register.php', {
+                await Utils.fetchAPI('api/register.php', {
                     method: 'POST',
                     body: JSON.stringify(data)
                 });
-                window.location.href = '../../pages/dashboard/index.php';
+                window.location.href = 'dashboard.html';
             } catch (error) {
                 Utils.showAlert(error.message);
             }
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             try {
-                await Utils.fetchAPI('../../api/auth/logout.php', { method: 'POST' });
-                window.location.href = '../../pages/public/index.php';
+                await Utils.fetchAPI('api/logout.php', { method: 'POST' });
+                window.location.href = 'index.html';
             } catch (error) {
                 console.error('Logout failed', error);
             }

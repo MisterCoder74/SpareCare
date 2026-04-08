@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Load current data
     try {
-        const professional = await Utils.fetchAPI('../../api/professionals/get.php');
+        const professional = await Utils.fetchAPI('api/get-profile.php');
         const profile = professional.profile;
 
         // Fill Profile Form
-        if (profile.photo) photoPreview.src = '../../' + profile.photo;
+        if (profile.photo) photoPreview.src = profile.photo;
         document.getElementById('first_name').value = profile.first_name || '';
         document.getElementById('last_name').value = profile.last_name || '';
         document.getElementById('phone').value = profile.phone || '';
@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         formData.append('photo', photoInput.files[0]);
 
         try {
-            const response = await fetch('../../api/professionals/upload-photo.php', {
+            const response = await fetch('api/upload-photo.php', {
                 method: 'POST',
                 body: formData
             });
             const data = await response.json();
             if (data.success) {
-                photoPreview.src = '../../' + data.photo_url;
+                photoPreview.src = data.photo_url;
                 Utils.showAlert('Foto aggiornata con successo', 'success');
             } else {
                 throw new Error(data.error);
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         try {
-            await Utils.fetchAPI('../../api/professionals/update.php', {
+            await Utils.fetchAPI('api/update-profile.php', {
                 method: 'POST',
                 body: JSON.stringify(profileUpdate)
             });
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         try {
-            await Utils.fetchAPI('../../api/professionals/update.php', {
+            await Utils.fetchAPI('api/update-profile.php', {
                 method: 'POST',
                 body: JSON.stringify(profileUpdate)
             });
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
 
         try {
-            await Utils.fetchAPI('../../api/professionals/update.php', {
+            await Utils.fetchAPI('api/update-profile.php', {
                 method: 'POST',
                 body: JSON.stringify(profileUpdate)
             });

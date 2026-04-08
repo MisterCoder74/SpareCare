@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            await Utils.fetchAPI('../../api/contact/send-email.php', {
+            await Utils.fetchAPI('api/send-email.php', {
                 method: 'POST',
                 body: JSON.stringify(data)
             });
