@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const params = new URLSearchParams(filters);
         try {
-            const professionals = await Utils.fetchAPI(`../../api/professionals/list.php?${params.toString()}`);
+            const professionals = await Utils.fetchAPI(`api/list-professionals.php?${params.toString()}`);
             renderResults(professionals);
         } catch (error) {
             resultsContainer.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Photo path - ensure correct relative path
             const photoSrc = p.photo
-                ? `../../${p.photo}`
+                ? p.photo
                 : 'https://via.placeholder.com/300x200?text=Foto+Profilo';
 
             return `

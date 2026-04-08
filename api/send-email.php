@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/common.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse(['error' => 'Method not allowed'], 405);
@@ -16,8 +15,7 @@ if (empty($prof_id) || empty($name) || empty($email) || empty($message)) {
     jsonResponse(['error' => 'Tutti i campi sono obbligatori'], 400);
 }
 
-$db = new Database();
-$professional = $db->findProfessionalById($prof_id);
+$professional = findProfessionalById($prof_id);
 
 if (!$professional) {
     jsonResponse(['error' => 'Professionista non trovato'], 404);
@@ -28,6 +26,7 @@ $to = $professional['profile']['contact_email'] ?? '';
 if (empty($to)) {
     jsonResponse(['error' => 'Il professionista non ha fornito un indirizzo email di contatto'], 400);
 }
+
 $subject = "Nuovo messaggio da SpareCare: " . $name;
 $headers = "From: " . $email . "\r\n" .
            "Reply-To: " . $email . "\r\n" .

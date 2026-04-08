@@ -1,32 +1,30 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/common.php';
 
 $city = sanitize($_GET['city'] ?? '');
 $service = sanitize($_GET['service'] ?? '');
 $availability = sanitize($_GET['availability'] ?? '');
 
-$db = new Database();
-$professionals = $db->getProfessionals();
+$professionals = getProfessionals();
 
 $results = array_filter($professionals, function($p) use ($city, $service, $availability) {
     if (!$p['is_active']) return false;
-    
+
     // City filter
     if ($city && stripos($p['profile']['location']['city'], $city) === false) {
         return false;
     }
-    
+
     // Service filter
     if ($service && !in_array($service, $p['profile']['services'])) {
         return false;
     }
-    
+
     // Availability filter
     if ($availability && empty($p['profile']['availability'][$availability])) {
         return false;
     }
-    
+
     // Basic completion check (require name)
     if (empty($p['profile']['first_name']) || empty($p['profile']['last_name'])) {
         return false;

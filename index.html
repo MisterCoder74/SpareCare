@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpareCare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html">SpareCare</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Cerca Professionisti</a></li>
+                <li><a href="#" id="check-auth-dashboard" style="display: none;">Dashboard</a></li>
+                <li><a href="#" id="check-auth-logout" style="display: none;">Logout</a></li>
+                <li><a href="login.html" id="check-auth-login">Accedi</a></li>
+                <li><a href="register.html" class="btn btn-primary" id="check-auth-register">Registrati</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <div class="search-hero">
+            <h1>Trova l'assistenza perfetta per te</h1>
+            <p>Cerca tra centinaia di professionisti qualificati nella tua zona.</p>
+
+            <div class="search-box card">
+                <form id="search-form" class="grid-3">
+                    <div class="form-group">
+                        <label for="city-search">Città</label>
+                        <input type="text" id="city-search" name="city" class="form-control" placeholder="es. Milano">
+                    </div>
+                    <div class="form-group">
+                        <label for="service-search">Servizio</label>
+                        <select id="service-search" name="service" class="form-control">
+                            <option value="">Tutti i servizi</option>
+                            <option value="assistenza_anziani">Assistenza Anziani</option>
+                            <option value="assistenza_disabili">Assistenza Disabili</option>
+                            <option value="baby_sitting">Baby Sitting</option>
+                            <option value="colf">Collaboratore Domestico</option>
+                            <option value="badante">Badante</option>
+                            <option value="fisioterapia">Fisioterapia a domicilio</option>
+                            <option value="infermieristica">Assistenza Infermieristica</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="availability-search">Disponibilità</label>
+                        <select id="availability-search" name="availability" class="form-control">
+                            <option value="">Qualsiasi</option>
+                            <option value="morning">Mattina</option>
+                            <option value="afternoon">Pomeriggio</option>
+                            <option value="evening">Sera</option>
+                            <option value="night">Notte</option>
+                            <option value="weekend">Weekend</option>
+                            <option value="holidays">Festivi</option>
+                        </select>
+                    </div>
+                    <div class="search-actions">
+                        <button type="submit" class="btn btn-primary btn-block">Cerca</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="results-container" class="results-grid">
+            <!-- Results will be injected here -->
+            <div class="loading-message">Caricamento professionisti...</div>
+        </div>
+
+        <!-- Modal Contatto -->
+        <div id="contact-modal" class="modal">
+            <div class="modal-content card">
+                <span class="close-modal">&times;</span>
+                <h2 id="modal-title">Contatta Professionista</h2>
+                <div id="contact-info" class="contact-info">
+                    <p><strong>Telefono:</strong> <span id="modal-phone"></span></p>
+                    <p><strong>Email:</strong> <span id="modal-email"></span></p>
+                </div>
+                <hr>
+                <form id="contact-form">
+                    <input type="hidden" id="contact-prof-id" name="prof_id">
+                    <div class="form-group">
+                        <label for="sender-name">Il tuo nome</label>
+                        <input type="text" id="sender-name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sender-email">La tua email</label>
+                        <input type="email" id="sender-email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Messaggio</label>
+                        <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Invia Messaggio</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="container">
+        <p>&copy; 2025 SpareCare. Tutti i diritti riservati.</p>
+    </footer>
+    <script src="app.js"></script>
+    <script>
+        // Check authentication status and update navbar
+        fetch('api/get-profile.php', { credentials: 'same-origin' })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('check-auth-dashboard').style.display = 'inline';
+                    document.getElementById('check-auth-logout').style.display = 'inline';
+                    document.getElementById('check-auth-login').style.display = 'none';
+                    document.getElementById('check-auth-register').style.display = 'none';
+                }
+            })
+            .catch(() => {
+                // Not logged in
+            });
+    </script>
+    <script src="auth.js"></script>
+    <script src="search.js"></script>
+    <script src="modal.js"></script>
+</body>
+</html>

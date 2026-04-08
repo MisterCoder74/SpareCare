@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../includes/auth-check.php';
+require_once __DIR__ . '/common.php';
+
+requireAuth();
 
 $id = getLoggedInUserId();
-$db = new Database();
-$professional = $db->findProfessionalById($id);
+$professional = findProfessionalById($id);
 
 if (!$professional) {
     jsonResponse(['error' => 'Professionista non trovato'], 404);

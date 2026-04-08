@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../../config/database.php';
-require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/common.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse(['error' => 'Method not allowed'], 405);
@@ -23,8 +22,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     jsonResponse(['error' => 'Email non valida'], 400);
 }
 
-$db = new Database();
-if ($db->findProfessionalByEmail($email)) {
+if (findProfessionalByEmail($email)) {
     jsonResponse(['error' => 'Email già registrata'], 400);
 }
 
@@ -63,9 +61,8 @@ $professional = [
     ]
 ];
 
-$id = $db->addProfessional($professional);
+$id = addProfessional($professional);
 
-startSession();
 $_SESSION['user_id'] = $id;
 
 jsonResponse(['success' => true, 'message' => 'Registrazione completata']);

@@ -6,8 +6,8 @@ error_log
 data/*.tmp
 
 # Uploads
-assets/images/uploads/*
-!assets/images/uploads/.htaccess
+uploads/*
+!uploads/.htaccess
 
 # OS files
 .DS_Store
