@@ -25,7 +25,7 @@ $target_path = UPLOADS_PATH . '/' . $filename;
 if (move_uploaded_file($file['tmp_name'], $target_path)) {
     $db = new Database();
     $professional = $db->findProfessionalById($id);
-    
+
     // Delete old photo if exists
     if (!empty($professional['profile']['photo'])) {
         $old_photo = BASE_PATH . '/' . $professional['profile']['photo'];
@@ -33,11 +33,11 @@ if (move_uploaded_file($file['tmp_name'], $target_path)) {
             unlink($old_photo);
         }
     }
-    
+
     $professional['profile']['photo'] = 'assets/images/uploads/' . $filename;
     $db->updateProfessional($professional);
-    
-    jsonResponse(['success' => true, 'photo_url' => '/' . $professional['profile']['photo']]);
+
+    jsonResponse(['success' => true, 'photo_url' => $professional['profile']['photo']]);
 } else {
     jsonResponse(['error' => 'Errore durante l\'upload'], 500);
 }
