@@ -85,7 +85,17 @@ require_once __DIR__ . '/../../includes/header.php';
                         <?php endforeach; ?>
                     </div>
                 </div>
-                
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="monthly_discount" name="monthly_discount" value="true">
+                        <strong>Offro sconti per contratti mensili</strong>
+                        <span style="display: block; margin-left: 1.5rem; color: var(--secondary-color); font-size: 0.9rem;">
+                            Mostra un badge "Sconti mensili" sulla tua scheda pubblica
+                        </span>
+                    </label>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Aggiorna Servizi</button>
             </form>
         </div>
