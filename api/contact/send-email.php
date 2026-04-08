@@ -23,7 +23,11 @@ if (!$professional) {
     jsonResponse(['error' => 'Professionista non trovato'], 404);
 }
 
-$to = $professional['profile']['contact_email'];
+$to = $professional['profile']['contact_email'] ?? '';
+
+if (empty($to)) {
+    jsonResponse(['error' => 'Il professionista non ha fornito un indirizzo email di contatto'], 400);
+}
 $subject = "Nuovo messaggio da SpareCare: " . $name;
 $headers = "From: " . $email . "\r\n" .
            "Reply-To: " . $email . "\r\n" .

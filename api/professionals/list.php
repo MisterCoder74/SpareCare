@@ -49,7 +49,8 @@ $public_results = array_map(function($p) {
         'rates' => $p['profile']['rates'],
         'availability' => $p['profile']['availability'],
         'phone' => $p['profile']['phone'],
-        'email' => $p['profile']['contact_email']
+        'email' => $p['profile']['contact_email'],
+        'monthly_discount' => $p['profile']['monthly_discount'] ?? false
     ];
 }, array_values($results));
 

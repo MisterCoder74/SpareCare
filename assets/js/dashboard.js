@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Fill Services Form
         document.getElementById('hourly_rate').value = profile.rates.hourly || 0;
         document.getElementById('daily_rate').value = profile.rates.daily || 0;
-        
+        document.getElementById('monthly_discount').checked = profile.monthly_discount || false;
+
         const serviceCheckboxes = servicesForm.querySelectorAll('input[name="services[]"]');
         serviceCheckboxes.forEach(cb => {
             if (profile.services.includes(cb.value)) cb.checked = true;
@@ -99,10 +100,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         const services = formData.getAll('services[]');
         const hourly_rate = parseFloat(formData.get('hourly_rate'));
         const daily_rate = parseFloat(formData.get('daily_rate'));
+        const monthly_discount = formData.has('monthly_discount');
 
         const profileUpdate = {
             profile: {
                 services: services,
+                monthly_discount: monthly_discount,
                 rates: {
                     hourly: hourly_rate,
                     daily: daily_rate,

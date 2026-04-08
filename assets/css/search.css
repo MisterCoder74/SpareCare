@@ -25,55 +25,208 @@
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 2rem;
     margin-top: 5rem;
 }
 
+/* Professional Card Styles */
 .prof-card {
     display: flex;
     flex-direction: column;
     height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.prof-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.prof-photo-container {
+    position: relative;
+    margin: -1.5rem -1.5rem 0 -1.5rem;
 }
 
 .prof-photo {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
     border-radius: 8px 8px 0 0;
-    margin: -1.5rem -1.5rem 1rem -1.5rem;
+    display: block;
+}
+
+/* Badges Container */
+.prof-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    z-index: 2;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.badge-night {
+    background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+}
+
+.badge-discount {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+}
+
+/* Card Content */
+.prof-content {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .prof-name {
     margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-color);
 }
 
 .prof-location {
     color: var(--secondary-color);
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.prof-phone {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.prof-phone a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.prof-phone a:hover {
+    text-decoration: underline;
 }
 
 .prof-bio {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
     margin-bottom: 1rem;
+    line-height: 1.5;
     flex-grow: 1;
 }
 
-.prof-footer {
-    border-top: 1px solid var(--border-color);
-    padding-top: 1rem;
+/* Services Tags */
+.prof-services {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 0.75rem;
+}
+
+.service-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: #e9ecef;
+    color: #495057;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.service-tag-more {
+    background-color: #dee2e6;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Availability Section */
+.prof-availability {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.availability-item {
+    display: inline-flex;
     align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+    padding: 2px 6px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
 }
 
-.prof-rate {
-    font-weight: bold;
+/* Rates Section */
+.prof-rates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.rate-item {
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+.rate-item strong {
     color: var(--success-color);
+    font-size: 1.1rem;
 }
 
+.daily-rate {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Contact Button */
+.prof-card .contact-btn {
+    width: 100%;
+    margin-top: auto;
+    padding: 0.75rem;
+    font-weight: 600;
+}
+
+/* Loading and Messages */
+.loading-message {
+    text-align: center;
+    padding: 3rem;
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+}
+
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -82,7 +235,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
@@ -99,14 +252,57 @@
     cursor: pointer;
 }
 
+.contact-info {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.contact-info p {
+    margin: 0.5rem 0;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .grid-3 {
         grid-template-columns: 1fr;
     }
+
     .search-box {
         margin-bottom: 2rem;
     }
+
     .results-grid {
         margin-top: 2rem;
+        grid-template-columns: 1fr;
+    }
+
+    .prof-photo {
+        height: 200px;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+
+    .prof-rates {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .results-grid {
+        gap: 1rem;
+    }
+
+    .prof-name {
+        font-size: 1.1rem;
+    }
+
+    .prof-bio {
+        font-size: 0.85rem;
     }
 }
