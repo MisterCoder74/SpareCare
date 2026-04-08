@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const profile = professional.profile;
 
         // Fill Profile Form
-        if (profile.photo) photoPreview.src = profile.photo;
+        if (profile.photo) photoPreview.src = '../../' + profile.photo;
         document.getElementById('first_name').value = profile.first_name || '';
         document.getElementById('last_name').value = profile.last_name || '';
         document.getElementById('phone').value = profile.phone || '';
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             const data = await response.json();
             if (data.success) {
-                photoPreview.src = data.photo_url;
+                photoPreview.src = '../../' + data.photo_url;
                 Utils.showAlert('Foto aggiornata con successo', 'success');
             } else {
                 throw new Error(data.error);
